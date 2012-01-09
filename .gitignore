@@ -1,0 +1,4 @@
+*.pyc
+guestbook/*
+settings_local.py
+

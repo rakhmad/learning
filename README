@@ -1,16 +1,22 @@
-# A Project Tracking Application
+# A Project Tracking Application #
 
-## Introduction
+## Introduction ##
+
 This is an active (a.k.a still learning) web application. This web application will give 
 you capability to track any task within any projects, getting reports about unfinished 
 task, and another thing related to bug-reporting stuff. Inspired by Atlassian's JIRA.
 
+This web app I built when I decided to learn Django. This is the furtest step I have
+reached when I am learning a new language or framework.
+
 This application built on this techology stack:
+
 1. Django 1.3.1
 2. Postgresql 9.1
 At the moment, this application server __very__ basic functionality. No business logic at all.
 
 Future Improvement:
+
 1. Integrate with Twitter's Bootstrap in templates
 2. Using openID API
 3. Developing a twitter bot for reminder

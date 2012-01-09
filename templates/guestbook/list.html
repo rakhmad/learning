@@ -1,0 +1,18 @@
+<html lang="en">
+<head>
+	<title>{{ title }}</title>
+	<!-- Date: 2011-12-30 -->
+</head>
+<body>
+<h2>{{ msg }}</h2>
+<div>
+	{% for guest in guests %}
+		<p>Nama : {{guest.nama}}</p>
+		<p>Email: {{ guest.email }}</p>
+		<p>Website: {{ guest.website|urlize }}</p>
+		<p>Pesan: {{guest.pesan|linebreaks}}</p>
+		<hr/>
+	{% endfor %}
+</div>
+</body>
+</html>
