@@ -1,0 +1,68 @@
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta content="text/html">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="Rakhmad Azhari">
+    <title class="title">Tasque - {{ title }}</title>
+    {% load bootstrap %}
+    {% bootstrap_css %}
+    {% bootstrap_js all %}
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+<div class="topbar">
+    <div class="topbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="#">Tasque-NG</a>
+            <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <p class="pull-right">Welcome, <a href="#">username</a></p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="sidebar">
+        <div class="well">
+            <h5>Home</h5>
+            <ul>
+                <li><a href={% url project_home %}>Home</a></li>
+            </ul>
+            <h5>My Project</h5>
+            <ul>
+                <li><a href={% url project_list %}>Project(s)</a></li>
+                <li><a href={% url project_new %}>New Project</a></li>
+            </ul>
+            <h5>My Task</h5>
+            <ul>
+                <li><a href="#">Uncomplete Task(s)</a></li>
+                <li><a href="#">New Task</a></li>
+            </ul>
+            <h5>My Account</h5>
+            <ul>
+                <li><a href="#">Change Password</a></li>
+                <li><a href="#">Edit Account Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+   <div class="content">
+   {% block container %}
+
+   {% endblock %}
+    </div>
+    <footer>
+        <p>&copy; Rakhmad Azhari 2012</p>
+    </footer>
+</div>
+</div>
+</body>
+</html>
