@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{%  block container %}
+    <div class="row">
+        <div class="span1"><p></p></div>
+        <div class="span7">
+            <h2>{{ msg }}</h2>
+            <p></p>
+            <table>
+                <tbody>
+                <tr>
+                    <td>Project Name</td>
+                    <td>:</td>
+                    <td>{{ project.name }}</td>
+                </tr>
+                <tr>
+                    <td>Project Description</td>
+                    <td>:</td>
+                    <td><textarea rows="3" class="large disabled">{{ project.desc }}</textarea></td>
+                </tr>
+                <tr>
+                    <td>Project Started</td>
+                    <td>:</td>
+                    <td>{{ project.start|date:"d M Y"}}</td>
+                </tr>
+                <tr>
+                    <td>Project End</td>
+                    <td>:</td>
+                    <td>{{ project.end|date:"d M Y"}}</td>
+                </tr>
+                <tr>
+                    <td>Team Leader</td>
+                    <td>:</td>
+                    <td>{{ project.leader.full_name }}</td>
+                </tr>
+                <tr>
+                    <td>Team Member</td>
+                    <td>:</td>
+                    <td>
+                        {% for member in project.members.all %}
+                            <p>{{ member.full_name }}</p>
+                        {% endfor %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p>
+                <a class="btn primary actions" href={% url task_new project.id %}>Add New Task</a>
+            </p>
+        </div>
+{% endblock %}

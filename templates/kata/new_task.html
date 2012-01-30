@@ -6,7 +6,7 @@
             <h2>{{ msg }}</h2>
             {% if form.errors %}
                 <div class="alert-message block-message error">
-                   Fail to create new Project. Please check your form.
+                    Fail to create new task. Please check form below.
                 </div>
             {% endif %}
             <form action="." method="POST" class="form-row">
@@ -21,24 +21,31 @@
                         <div class="input">{{ form.desc }}</div>
                     </div>
                     <div class="clearfix">
-                        {{ form.start.label_tag }}
-                        <div class="input">{{ form.start }}</div>
+                        {{ form.reporter.label_tag }}
+                        <div class="input">{{ form.reporter }}</div>
                     </div>
                     <div class="clearfix">
-                        {{ form.end.label_tag }}
-                        <div class="input">{{ form.end }}</div>
+                        {{ form.assignee.label_tag }}
+                        <div class="input">{{ form.assignee }}</div>
                     </div>
                     <div class="clearfix">
-                        {{ form.leader.label_tag }}
-                        <div class="input">{{ form.leader }}</div>
+                        {{ form.priority.label_tag }}
+                        <div class="input">{{ form.priority }}</div>
                     </div>
                     <div class="clearfix">
-                        {{ form.members.label_tag }}
-                        <div class="input">{{ form.members }}</div>
+                        {{ form.tType.label_tag }}
+                        <div class="input">{{ form.tType }}</div>
                     </div>
-
+                    <div class="clearfix">
+                        {{ form.bugType.label_tag }}
+                        <div class="input">{{ form.bugType }}</div>
+                    </div>
+                    <div class="clearfix">
+                        {{ form.status.label_tag }}
+                        <div class="input">{{ form.status }}</div>
+                    </div>
                 </fieldset>
-                <input type="submit" value="Create new project" class="btn actions primary">
+                <input type="submit" value="Create new task" class="btn actions primary">
             </form>
         </div>
     </div>

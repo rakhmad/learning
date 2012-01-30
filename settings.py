@@ -13,6 +13,7 @@ MANAGERS = ADMINS
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
+
 TIME_ZONE = 'Asia/Jakarta'
 
 # Language code for this installation. All choices can be found here:
@@ -42,7 +43,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -80,6 +81,7 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -105,9 +107,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     #'django.contrib.admindocs',
-		'myweb',
-	  'myweb.guestbook',
-		'myweb.kata',
+    'myweb',
+    'myweb.guestbook',
+    'myweb.kata',
+    'debug_toolbar',
+    'gunicorn',
+    'bootstrapped',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -132,6 +137,22 @@ LOGGING = {
        },
     }
 }
+
+INTERNAL_IPS = (
+	'127.0.0.1',
+)
+
+DEBUG_TOOLBAR_PANELS = (
+	'debug_toolbar.panels.version.VersionDebugPanel',
+	'debug_toolbar.panels.timer.TimerDebugPanel',
+	'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+	'debug_toolbar.panels.headers.HeaderDebugPanel',
+	'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+	'debug_toolbar.panels.template.TemplateDebugPanel',
+	'debug_toolbar.panels.sql.SQLDebugPanel',
+	'debug_toolbar.panels.signals.SignalDebugPanel',
+	'debug_toolbar.panels.logger.LoggingPanel',
+)
 
 try: 
 	from settings_local import *

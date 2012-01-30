@@ -1,36 +1,56 @@
+from datetime import datetime
 from django import forms
-from django.forms import extras
-from myweb.kata.models import KataUser
+from kata.models import KataUser
 
 class ProjectForm(forms.Form):
-	name = forms.CharField()
-	desc = forms.CharField(widget=forms.Textarea)
-	sdw = forms.extras.widgets.SelectDateWidget()
-	start = forms.DateField(widget=sdw)
-	end = forms.DateField(widget=sdw)
-	leader = forms.ModelChoiceField(queryset=KataUser.objects.filter(is_staff=False), empty_label="Pilih Ketua")
-	members = forms.ModelMultipleChoiceField(queryset=KataUser.objects.filter(is_staff=False), widget=forms.CheckboxSelectMultiple)
-	
-	def clean(self):
-		cleaned_data = self.cleaned_data
-		start = cleaned_data.get('start')
-		end = cleaned_data.get('end')
-		if start > end:
-			raise forms.ValidationError('Tanggal berakhir proyek tidak boleh lebih dulu dibandingkan tanggal mulai')
-		
-		return cleaned_data
-	
-	
+    name = forms.CharField()
+    desc = forms.CharField(widget=forms.Textarea)
+    start = forms.DateField(initial=datetime.now)
+    end = forms.DateField(initial=datetime.now)
+    leader = forms.ModelChoiceField(queryset=KataUser.objects.filter(is_staff=False), empty_label="Choose Team Leader")
+    members = forms.ModelMultipleChoiceField(queryset=KataUser.objects.filter(is_staff=False))
+
+
 class TaskForm(forms.Form):
-	name = forms.CharField()
-	desc = forms.CharField(widget=forms.Textarea)
-	reporter = forms.ModelChoiceField(queryset=KataUser.objects.filter(is_staff=False))
-	assignee = forms.ModelChoiceField(queryset=KataUser.objects.filter(is_staff=False))
-	priority = forms.ChoiceField()
-	tType = forms.ChoiceField()
-	bugType = forms.ChoiceField()
-	status = forms.ChoiceField()
-	start = forms.DateField()
-	expected = forms.DateField()
-	
-	
+    TASK_PRIORITIES = (
+        (u'Normal', 'Normal'),
+        (u'Immediate', 'Immediate'),
+        (u'Urgent', 'Urgent'),
+        (u'Critical', 'Critical'),
+    )
+
+    TASK_TYPES = (
+        (u'Feature', 'Feature'),
+        (u'Bug', 'Bug'),
+        (u'Enhancement', 'Enhancement'),
+        )
+
+    BUG_TYPES = (
+        (u'Minor', 'Minor'),
+        (u'Normal', 'Normal'),
+        (u'Major', 'Major'),
+        (u'Critical', 'Critical'),
+        (u'Blocking', 'Blocking'),
+    )
+
+    TASK_STATUS = (
+        (u'Closed', 'Closed'),
+        (u'Open', 'Open'),
+        (u'Resolved', 'Resolved'),
+        (u'Wont Fix', 'Wont Fix'),
+        (u'Reopen', 'Reopen'),
+    )
+
+    name = forms.CharField()
+    desc = forms.CharField(widget=forms.Textarea)
+    reporter = forms.ModelChoiceField(queryset=KataUser.objects.filter(is_staff=False))
+    assignee = forms.ModelChoiceField(queryset=KataUser.objects.filter(is_staff=False))
+    priority = forms.ChoiceField(choices=TASK_PRIORITIES)
+    tType = forms.ChoiceField(choices=TASK_TYPES)
+    bugType = forms.ChoiceField(choices=BUG_TYPES)
+    status = forms.ChoiceField(TASK_STATUS)
+    start = forms.DateField(initial=datetime.today)
+    expected = forms.DateField(initial=datetime.today)
+
+
+    

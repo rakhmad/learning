@@ -1,32 +1,31 @@
-<html>
-	<head>
-		<title>Aplikasi Manajemen Proyek - {{ title }}</title>
-	</head>
-	<body>
-		<h2>{{ msg }}</h2>
-		{% for project in projects %}
-			<div>
-				<p>Nama Proyek: {{ project.name}}</p>
-				<p>Team Leader: {{ project.leader.first_name }}</p>
-				<p>Anggota Tim: </p>
-				<ul>
-				{% for member in project.members.all %}
-					<li>{{member.first_name}}</li>
-				{% endfor %}
-				</ul>
-				{% if project.tasks.all %}
-				<p>Pekerjaan Terkait</p>
-				<ul>
-					{% for task in project.tasks.all %}
-					<li>{{ task.tName }} </li>
-					{% endfor %}
-				</ul>
-				{% else %}
-				<p><a href="./task/add">Tambah Pekerjaan</a></p>
-				{% endif %}
-			<hr/>
-			</div>
-		{% endfor %}
-		<a href="./add/">Buat Proyek Baru</a>
-	</body>
-</html>
+{% extends 'base.html' %}
+{% block container%}
+    <div class="row">
+    <div class="span1"><p></p></div>
+    <div class="span7">
+        <h2>{{ msg }}</h2>
+        <p><br /></p>
+        <table class="zebra-stripped">
+            <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Team Leader</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for project in projects %}
+            <tr>
+                <td>{{ project.name }}</td>
+                <td>{{ project.leader.full_name }}</td>
+                <td><a class="" href={% url project_detail project.id %}>Details...</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p>
+            <a class="btn primary actions" href={% url project_new  %}>Create New Project</a>
+        </p>
+    </div>
+    </div>
+{% endblock %}
